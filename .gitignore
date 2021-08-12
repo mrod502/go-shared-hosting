@@ -4,6 +4,10 @@
 *.dll
 *.so
 *.dylib
+*.osx
+*.lnx
+*.arm
+*.pi
 
 # Test binary, built with `go test -c`
 *.test
