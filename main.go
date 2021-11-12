@@ -2,37 +2,31 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"os/signal"
-	"path"
 	"time"
 
-	gocache "github.com/mrod502/go-cache"
 	"github.com/mrod502/go-shared-hosting/gsh"
 	yaml "gopkg.in/yaml.v2"
 )
 
 func main() {
 
-	var configPath = flag.String("Config", "config", "the config file path")
-	flag.Parse()
-
 	var config = new(gsh.Config)
-	home, _ := os.UserHomeDir()
-	b, err := ioutil.ReadFile(path.Join(home, *configPath))
+
+	b, err := ioutil.ReadFile(os.Args[1])
 	checkErr(err)
 
 	err = yaml.Unmarshal(b, config)
 	checkErr(err)
 
-	b, err = ioutil.ReadFile(path.Join(home, config.DomainConfigPath))
-
 	checkErr(err)
 
-	var routes = gocache.NewStringCache()
+	b, err = os.ReadFile(config.RoutesFile)
+
+	var routes = make(map[string]*gsh.Route)
 	err = json.Unmarshal(b, &routes)
 	checkErr(err)
 

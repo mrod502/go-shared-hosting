@@ -1,8 +1,1 @@
-
-domain_config_path: shared-hosting.json
-serve_port: 1738
-logger_address: 192.168.50.134:1738
-log_prefix: SHARED-HOSTING
-tls: false
-cert_file: /home/bruh/k/sprints.crt
-key_file: /home/bruh/k/sprints.key
+routes_file: paths-example.json
